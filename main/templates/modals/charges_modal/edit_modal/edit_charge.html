@@ -1,0 +1,78 @@
+
+
+
+
+
+<div class="modal fade" id="editCharge{{a.id}}" tabindex="-1" aria-labelledby="editChargeName" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editChargeName">Edit Charge</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'edit_charge' a.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label>Charge Type:</label>
+                                <select name="type" class="form-select" required>
+                                    {% for i in type %}
+                                    <option name="type" value="{{i.id}}" {% if i.id == a.ChargeType.id %} selected {% endif %}>{{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+            
+                            <div class="col-md-6 mb-2">
+                                <label>Charge Category:</label>
+                                <select name="category" class="form-select" required>
+                                    {% for i in category %}
+                                    <option name="category" value="{{i.id}}" {% if i.id == a.ChargeCategory.id %} selected {% endif %}>{{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+            
+                            <div class="col-md-6 mb-2">
+                                <label>Unit Type:</label>
+                                <select name="unit" class="form-select" required>
+                                    {% for i in unit %}
+                                    <option name="unit" value="{{i.id}}" {% if i.id == a.UnitType.id %} selected {% endif %}>{{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+            
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Charge Name:</label>
+                                <input type="text" id="name" name="name" value="{{a.name}}" class="form-control" required>
+                            </div>
+            
+                            <div class="col-md-6 mb-2">
+                                <label>Tax Category:</label>
+                                <select name="tax" class="form-select" required>
+                                    {% for i in tax %}
+                                    <option name="tax" value="{{i.id}}" {% if i.id == a.TaxCategory.id %} selected {% endif %}>{{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+            
+                            <div class="col-md-6">
+                                <label for="amount" class="form-label">Standard Charge (₹):</label>
+                                <input type="text" id="amount" name="amount" value="{{a.charge}}" class="form-control" required>
+                            </div>
+            
+                            <div class="col-12 mb-3">
+                                <label for="description" class="form-label">Description:</label>
+                                <textarea id="description" name="description" class="form-control">{{ a.description }}</textarea>
+                            </div>
+                    
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

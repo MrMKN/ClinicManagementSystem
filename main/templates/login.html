@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} login {% endblock %}
+{% block content %}
+
+<div class="loat-lg-end container border border-primary" style="margin-top: 5%; margin-bottom: 5%; border-radius: 12px; max-width: 300px">
+    <h1 style="text-align: center; font-variant: small-caps">login</h1>
+
+    {% for msg in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{msg}}
+        <a href="{% url 'login' %}"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="background: none; border: none">
+                <span aria-hidden="true">x</span>
+            </button></a>
+    </div>
+    {% endfor %}
+
+    <form class="form-floatin row g-3 p-2" style="text-align: left" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="mb-1">
+            <label for="" class="form-label" style="font-variant: all-small-caps; font-weight: 500;">Email ID:</label>
+            <input class="form-control" style="border-color: black" id="email" type="text" name="email">
+        </div>
+
+        <div class="mb-1">
+            <label for="password" class="form-label" style="font-variant: all-small-caps; font-weight: 500;">Password: </label>
+            <input class="form-control" style="border-color: black" id="password" type="password" name="password">
+        </div>
+
+        <div class="col-12" style="display: flex; justify-content: space-between">
+            <button style="color: black; font-variant: all-small-caps;" class="btn btn-primary" type="submit">LOGIN
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

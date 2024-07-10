@@ -1,0 +1,93 @@
+
+
+<div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="addStaffModalName" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light " id="addStaffModalName">Add New Staff</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+              
+            <form method="post" action="{% url 'add_staff' %}" class="row g-3 m-2" id="AddStaffForm">
+                {% csrf_token %}
+
+                <div class="col-md-6">
+                    <label for="inputName" class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control py-1" id="inputName" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control py-1" value="" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputRole" class="form-label">Role</label>
+                    {% if role %}
+                        <select name="role" class="form-select py-1" id="inputRole">
+                            {% for r in role %}
+                                <option value="{{ r.id }}">{{ r.name }}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        <input type="text" class="form-control py-1" value="No role available, please add role" disabled />
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputDesignation" class="form-label">Designation</label>
+                    <select name="designation" class="form-select py-1" id="inputDesignation" required>
+                        <option hidden selected></option>
+                        {% for r in designation %}
+                            <option value="{{ r.id }}">{{ r.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputDepartment" class="form-label">Department</label>
+                    <select name="department" class="form-select py-1" id="inputDepartment" required>
+                        <option hidden selected></option>
+                        {% for r in department %}
+                            <option value="{{ r.id }}">{{ r.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputSpecialist" class="form-label">Specialist</label>
+                    <select name="specialist" class="form-select py-1" id="inputSpecialist" required>
+                        <option hidden selected></option>
+                        {% for r in specialist %}
+                            <option value="{{ r.id }}">{{ r.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputGender" class="form-label">Gender</label>
+                    <select name="gender" class="form-select py-1" id="inputGender">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputPhone" class="form-label">Phone NO</label>
+                    <input type="text" name="phone" class="form-control py-1" id="inputPhone" maxlength="10" required />
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control py-1" id="inputPassword" required />
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+
+
+
+
+
+<div class="modal fade" id="addChargeType" tabindex="-1" aria-labelledby="addChargeTypeName" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 90%">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addChargeTypeName">Add Charge Type</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'add_charge_type' %}">
+                {% csrf_token %}
+
+                    <div class="row mb-3 m-2">
+                        <label class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input type="text" name="name" required class="form-control W-50">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 m-2">
+                        <label class="col-md-4 col-form-label">Appointment </label>
+                        <div class="col-md-8">
+                            <input type="checkbox" name="Appointment" class="form-check-input">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 m-2">
+                        <label class="col-md-4 col-form-label">OPD </label>
+                        <div class="col-md-8">
+                            <input type="checkbox" name="OPD" class="form-check-input">
+                        </div>
+                    </div>
+                   
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

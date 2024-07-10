@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} patients {% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+
+<main>
+    <table id="myTable" class="shadow-lg table table-stripedy mt-2">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Guardian</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Bloodgroup</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for a in patients %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{a.name}} </td>
+                <td>{{a.guardian}}</td>
+                <td>{{a.get_gender_display}}</td>
+                <td>{{a.age}}</td>
+                <td>{{a.get_bloodgroup_display}}</td>
+                <td>{{a.phone}}</td>
+                <td class="d-flex ">
+                    {% comment %} edit {% endcomment %}
+                    <button type="button" class="btn btn-primary text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#editAppoinment{{a.id}}" title="Edit">
+                        <i class="bi bi-pencil-square" ></i>
+                    </button>
+
+                    {% comment %} delete {% endcomment %}
+                    <button type="button" class="btn btn-danger text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" mdata-bs-target="#deleteAppoinment{{a.id}}" title="View & Delete">
+                        <i class="bi bi-file-earmark-fill"></i>
+                    </button>
+
+                    {% comment %} Print {% endcomment %}
+                    {% include 'print/appoinment.html' %}
+                    <button onclick="printAppoinment('printPage{{a.id}}')" type="button" class="btn btn-success m-1 fs-9 btn-sm" title="Print">
+                        <i class="bi bi-printer-fill"></i>
+                    </button>
+
+                </td>
+                {% include 'modals/edit_appoinment.html' %}
+                {% include 'modals/delete_appoinment.html' %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+
+<script type="text/javascript">
+    function printAppoinment(page) {
+        let printContents = document.getElementById(page).innerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+{% endblock %}

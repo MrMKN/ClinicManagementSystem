@@ -1,0 +1,47 @@
+
+
+
+<div class="modal fade" id="addChargeCategory" tabindex="-1" aria-labelledby="addChargeCategoryName" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 90%">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="addChargeCategoryName">Add Charge Category</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'add_charge_category' %}" class="row g-3 m-4">
+                {% csrf_token %}
+                
+                <div class="col-md-6">
+                    <label for="chargeType" class="form-label">Charge Type</label>
+                    {% if type %}
+                        <select name="type" id="chargeType" required class="form-select">
+                            {% for i in type %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        <input type="text" class="form-control" value="No types available. Please add types." disabled>
+                    {% endif %}
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" required id="name" class="form-control">
+                </div>
+                
+                <div class="col-12">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description" class="form-control" placeholder="..." style="height: 100px;"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,54 @@
+
+
+
+<div class="modal fade" id="edit{{class_name}}{{a.id}}" tabindex="-1" aria-labelledby="edit{{class_name}}Name" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="edit{{class_name}}Name">Edit {{class_name}}</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'edit_role' a.id %}">
+                {% csrf_token %}
+                <div class="modal-body "> 
+                    
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" id="name" name="name" value="{{a.name}}" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3 m-2">
+                        <label>Dashboard </label>
+                        <input type="checkbox" name="dashboard" {% if a.dashboard %} checked {% endif %} class="form-check-input ms-2">
+                    </div>
+    
+                    <div class="mb-3 m-2">
+                        <label>Appointment </label>
+                        <input type="checkbox" name="appointment" {% if a.appointment %} checked {% endif %} class="form-check-input ms-2">
+                    </div>
+    
+                    <div class="mb-3 m-2">
+                        <label>Front Office </label>
+                        <input type="checkbox" name="front_office" {% if a.front_office %} checked {% endif %} class="form-check-input ms-2">
+                    </div>
+    
+                    <div class="mb-3 m-2">
+                        <label>Staffs </label>
+                        <input type="checkbox" name="staffs" {% if a.staffs %} checked {% endif %} class="form-check-input ms-2">
+                    </div>
+    
+                    <div class="mb-3 m-2">
+                        <label>Settings </label>
+                        <input type="checkbox" name="settings" {% if a.settings %} checked {% endif %} class="form-check-input ms-2">
+                    </div>
+                    
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+
+
+
+
+<div class="modal fade" id="editStaff{{a.id}}" tabindex="-1" aria-labelledby="editStaffName" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editStaffName">Edit Staff</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'edit_staff' a.id %}" class="row g-3">
+                {% csrf_token %}
+                <div class="row m-2">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" name="name" value="{{a.name}}" class="form-control" required>
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" value="{{a.email}}" class="form-control">
+                </div>
+        
+                <div class="col-md-6">
+                    <label for="role" class="form-label">Role:</label>
+                    <select id="role" name="role" class="form-select">
+                        {% for r in role %}
+                        <option value="{{r.id}}" {% if r.id == a.role.id %} selected {% endif %}>{{r.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="designation" class="form-label">Designation:</label>
+                    <select id="designation" name="designation" class="form-select">
+                        {% for r in designation %}
+                        <option value="{{r.id}}" {% if r.id == a.designation.id %} selected {% endif %}>{{r.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="department" class="form-label">Department:</label>
+                    <select id="department" name="department" class="form-select">
+                        {% for r in department %}
+                        <option value="{{r.id}}" {% if r.id == a.department.id %} selected {% endif %}>{{r.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="specialist" class="form-label">Specialist:</label>
+                    <select id="specialist" name="specialist" class="form-select">
+                        {% for r in specialist %}
+                        <option value="{{r.id}}" {% if r.id == a.specialist.id %} selected {% endif %}>{{r.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="gender" class="form-label">Gender:</label>
+                    <select id="gender" name="gender" class="form-select">
+                        <option value="M" {% if a.gender == 'M' %} selected {% endif %}>Male</option>
+                        <option value="F" {% if a.gender == 'F' %} selected {% endif %}>Female</option>
+                    </select>
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone NO:</label>
+                    <input type="text" id="phone" name="phone" maxlength="10" value="{{a.phone}}" class="form-control">
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" name="password" value="{{a.password}}" class="form-control" required>
+                </div>
+
+                <div class="col-12 mt-5">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Check me out
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+               
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

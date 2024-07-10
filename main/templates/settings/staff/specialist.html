@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} staff|specialist {% endblock %}
+{% block content %}
+
+    
+
+<main class="d-flex"> 
+    <div class="list-group fs-10" style="width: 200px;font-size: 14px; margin:10px!important;">
+        <a href="{% url 'role' %}" class="list-group-item list-group-item-action" aria-current="true">Role</a>
+        <a href="{% url 'department' %}" class="list-group-item list-group-item-action">Department</a>
+        <a href="{% url 'designation' %}" class="list-group-item list-group-item-action">Designation</a>
+        <a href="{% url 'specialist' %}" class="list-group-item list-group-item-action active">Specialist</a>
+    </div>
+
+    <div class="shadow-lg" style="margin:10px!important; padding:10px; width: 100%;">
+
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn text-center mt-4 fs-14 btn-sm custoemBtn" data-bs-toggle="modal" data-bs-target="#addSpecialist"><i class="bi bi-plus"></i> Add Specialist</button>
+        </div>
+
+        <table id="myTable" class="table table-stripedy mt-4">
+            <thead>
+                <tr>
+                    <th style="text-align: left!important">No.</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for a in specialist %}
+                <tr>
+                    <td style="text-align: left!important">{{forloop.counter}}</td>
+                    <td>{{a.name}} </td>
+                    <td class="d-flex ">
+                        {% comment %} edit {% endcomment %}
+                        <button type="button" class="btn btn-primary text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#edit{{class_name}}{{a.id}}" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                        {% comment %} delete {% endcomment %}                                        
+                        <button type="button" class="btn btn-danger text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#delete{{class_name}}{{a.id}}" title="View & Delete"><i class="bi bi-file-earmark-fill"></i></button>                                       
+                    </td>
+                    {% include 'modals/staff/delete/delete_staff_all.html' %} 
+                    {% include 'modals/staff/edit/edit_all.html' %} 
+                      
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+{% include 'modals/staff/add_specialist.html' %}
+
+    
+{% endblock %}

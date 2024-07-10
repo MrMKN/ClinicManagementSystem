@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} front office {% endblock %}
+{% block content %}
+
+
+
+<main>
+    <hr>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="p-0">Front Office</h4>
+        <button type="button" class="btn text-center fs-14 btn-sm custoemBtn" data-bs-toggle="modal" data-bs-target="#addVisitModal"><i class="bi bi-plus"></i> Add Visitor</button>
+    </div>
+    <hr>
+
+
+    <table id="myTable" class="shadow-lg table table-stripedy mt-4">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Visitor Name</th>
+            <th>Purpose</th>
+            <th>Phone Number </th>
+            <th>ID Card </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for a in visits %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{a.name}} </td>
+                <td>{{a.purpose}} </td>
+                <td>{{a.phone}} </td>
+                <td>{{a.id_card}} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+{% include 'modals/add_visit.html' %}
+
+
+
+
+{% endblock %}

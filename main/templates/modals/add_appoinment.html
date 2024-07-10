@@ -1,0 +1,232 @@
+
+
+<style>
+    tr {border-color: #ffffff; border-bottom-width: 10px}
+    td {padding: 10px;}
+    
+</style>
+
+
+<div class="modal fade" id="addAppoinment" tabindex="-1" aria-labelledby="addAppoinmentName" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 90%">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addAppoinmentName">Add Appoinment</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+        
+            <div class="w-100">
+                <div style="width: auto; margin: 0 auto;">
+                    <form method="post" action="{% url 'add_appoinment' %}" id="appoinmentForm">
+                        {% csrf_token %}
+                        <div style="padding: 10px;width: 100%;">
+                    
+                            <div style="margin-bottom: 9px; display: flex; justify-content: space-between">
+                                <div class="d-block w-100">
+                                    <select id="selectPatient" name="patient" required style="width: 75%; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                        {% for p in patients %}<option name="patient" value="{{p.id}}">{{p.name}}</option>{% endfor %}
+                                    </select>
+                                </div>
+                                <button type="button" class="custoemBtn btn btn-primary text-center w-25 btn-sm" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#addPatientModal"><i class="bi bi-plus"></i> Add Patient</button>
+                            </div>
+                            <hr>            
+                        
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label class="d-block mb-1">Doctor <small class="req"> *</small></label>
+                                        <select id="selectDoctor" class="doctor" name="doctor" required style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                            {% for d in doctors %}<option name="doctor" value="{{d.id}}">{{d.name}}</option>{% endfor %}
+                                        </select>
+                                    </td>
+                                
+                                    <td>
+                                        <label class="d-block mb-1">Shift <small class="req"> *</small></label>
+                                        <select id="doctorShift" class="shift" name="shift" required style="width: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></select>
+                                    </td>
+                                
+                                    <td>
+                                        <label class="d-block mb-1">Fees <small class="req"> *</small></label>
+                                        <input type="text" class="doctorfee" readonly name="amount" style="width: 100px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                    </td>
+                                
+                                     <td>
+                                        <label class="d-block mb-1 w-100">Payment</label>
+                                        <select name="payment" class="payment" required style="width: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                            <option name="payment" value="C">Cash</option>
+                                            <option name="payment" value="U">UPI</option>
+                                            <option name="payment" value="O">Other</option>
+                                            <option name="payment" value="N">Not Paid</option>
+                                        </select>
+                                    </td>
+                               
+                                </tr>
+                            
+                                <tr>
+                                    
+                                   <td>
+                                        <label class="d-block mb-1">Date & Time <small class="req"> *</small></label>
+                                        <input type="datetime-local" id="datetime" name="datetime" required style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                    </td>
+                                    
+                                    <td>
+                                        <label class="d-block mb-1">Priority</label>
+                                        <select name="priority" required style="width: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                            <option name="priority" value="N">Normal</option>
+                                            <option name="priority" value="U">Urgent</option>
+                                        </select>
+                                    </td>
+                                    
+                                    <td>
+                                        <label class="d-block mb-1">Token</label>
+                                        <input type="text" class="token" readonly name="token" style="width: 100px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                    </td>
+                                    
+                                    <td>
+                                        <div style="display: flex; margin-left: 10px; margin-top: 10px">
+                                            <div>Mob Book:</div>
+                                            <input type="checkbox" class="mobook" style="width: 15%!important; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; margin-left: 10px">
+                                        </div>
+                                    </td>
+                                </tr>
+                              
+                            </table>
+                        
+                        
+                            <div style="margin-bottom: 9px; display: flex; justify-content: space-between">
+                                <div class="d-block w-100 m-1">
+                                    <label class="d-block mb-1">Message</label>
+                                    <textarea name="message" placeholder="symtems, reasons ect..." style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+                                </div>
+                            </div>
+                                
+                        </div>
+                    
+                        <select name="status" class="status" style="display: none">
+                            <option name="status" value="A">Approved</option>
+                            <option name="status" value="P">Pending</option>
+                            <option name="status" value="C">Cancelled</option>
+                        </select>
+                    
+                        <div style="padding: 10px 20px; background-color: #f0f0f0; border-top: 1px solid #ccc;margin-left: auto;">
+                            <button type="button" style="padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; background-color: #6c757d; color: white;" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" style="padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; background-color: #007bff; color: white;" class="custoemBtn">Save</button>
+                        </div>
+    
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-UTmKg1zgIdKReBzbi17jGvxa6o49DBFbAOT5jRp2Jgs=" crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#selectPatient').selectize({
+            sortField: 'text'
+        });
+    });
+
+    $(document).ready(function () {
+        $('#selectDoctor').selectize({
+            sortField: 'text'
+        });
+    });
+    
+    
+    // mob Booking
+    $('.mobook').click(function() {
+        if ($(this).is(':checked')) {
+            $('.doctorfee').val(0);     
+            $(document).ready(()=>{$(".status option[value=P]").prop('selected', true);});
+            $(document).ready(()=>{$(".payment option[value=N]").prop('selected', true);});  
+        }
+        else {
+            update_amounts();
+            $(document).ready(()=>{$(".status option[value=P]").prop('selected', false);});
+            $(document).ready(()=>{$(".payment option[value=N]").prop('selected', false);});  
+        }
+    });
+
+    // Check Amount
+    $(document).ready(function(){
+        update_amounts();
+        $('.doctor').change(function() {
+            update_amounts();
+        });
+    });
+    
+    function update_amounts()
+    {
+        var fee = 0;
+        $('#appoinmentForm ').each(function() {
+            var doctor_id = $(this).find('.doctor').val();
+            {% for d in doctors %}
+            if (doctor_id == "{{d.id}}") {
+                var price = "{{d.fees.charge}}"
+            }
+            {% endfor %}
+            fee = price;
+        });
+        $('.doctorfee').val(fee);
+    }
+    
+    
+    // Check Doctor Shift
+    $(document).ready(function(){
+        update_shift();
+        $('.doctor').change(function() {
+            update_shift();
+        });
+    });
+    
+    function update_shift()
+    {
+        $('#appoinmentForm ').each(function() {
+            $('#doctorShift').empty();
+            var doctor_id = $(this).find('.doctor').val();
+            {% for d in doctors %}
+            if (doctor_id == "{{d.id}}") {
+                {% for s in d.shift.all %}
+                    $('#doctorShift').append( "<option value='{{s.id}}'>{{s.name}}</option>");
+                {% endfor %}
+            }
+            {% endfor %}
+        });
+    }
+
+    // Check Token
+    $(document).ready(function(){
+        update_token();
+        $('#datetime').change(function() {
+            update_token();
+        });
+    });
+    
+    function update_token() {
+
+        $('#appoinmentForm ').each(function() {
+            var date_str = $(this).find('#datetime').val();
+            var doctor_id = $(this).find('.doctor').val();
+            const date = date_str.split("T")[0];
+            fetch(`/get_token/${doctor_id}/${date}`)
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error:' + str(data.error));
+                } else {
+                    $('.token').val(data.next_token);
+                }
+            });
+        })
+    }
+
+                
+</script>
+    

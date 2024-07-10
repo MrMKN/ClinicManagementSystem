@@ -1,0 +1,50 @@
+
+
+
+
+
+
+<div class="modal fade" id="editChargeType{{a.id}}" tabindex="-1" aria-labelledby="editChargeTypeName" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="editChargeTypeName">Edit Charge Type</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'edit_charge_type' a.id %}">
+                {% csrf_token %}
+                <div class="modal-body "> 
+                    
+                    <div class="row mb-3 m-2">
+                        <label class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input type="text" name="name" class="form-control W-50 py-1">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 m-2">
+                        <label class="col-md-4 col-form-label">Appointment </label>
+                        <div class="col-md-8">
+                            <input type="checkbox" name="Appointment" {% if a.Appointment %} checked {% endif %} class="form-check-input">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 m-2">
+                        <label class="col-md-4 col-form-label">OPD </label>
+                        <div class="col-md-8">
+                            <input type="checkbox" name="OPD" {% if a.OPD %} checked {% endif %} class="form-check-input">
+                        </div>
+                    </div>
+                    
+                </div>  
+                    
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

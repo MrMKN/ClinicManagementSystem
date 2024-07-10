@@ -1,0 +1,120 @@
+{% load static %}
+
+<html lang="en">
+<head class="d-print-none">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.7.1.js">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+
+
+    <link rel="icon" href="../static/icons/favicon.svg" type="image/x-icon" />
+    <!-- [Google Font : Public Sans] icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <title class="d-print-none">CMS {% block title %} {% endblock %}</title>
+</head>
+
+<body>
+{% include 'navbar.html' %}
+
+<div class="alert alert-dismissible topaleart-inside fade show rounded-0" role="alert" style="text-align: end; background-color: #5b5960; color: #fff; display: none;">
+    Alert! You are using an unregistered version of CMS. Please register your purchase code.
+    <a class="close" style="cursor: pointer;"><span aria-hidden="true">x</span></a>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Slide down the alert on page load
+        $(".alert").slideDown(1000);
+        
+        // Add click event to close the alert
+        $(".alert .close").click(function() {
+            $(".alert").slideUp(500);
+        });
+    });
+</script>
+
+{% block content %}
+{% endblock %}
+
+{% include 'footer.html' %}
+</body>
+
+<link rel="stylesheet" href="https://code.jquery.com/jquery-3.7.1.js">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/js/dataTables.js">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js">
+
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+    new DataTable('#myTable',
+        {layout: {topStart:
+                    {buttons:
+                            [
+                                'copy',
+                                'csv',
+                                'excel',
+                                'pdf',
+                                'print'
+                            ]
+                    }
+            }
+        });
+
+    $(document).ready(function () {
+        $('#selectPatient').selectize({
+            sortField: 'text'
+        });
+    });
+
+    $(document).ready(function () {
+        $('#selectDoctor').selectize({
+            sortField: 'text'
+        });
+    });
+</script>
+</html>
+

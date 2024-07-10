@@ -1,0 +1,121 @@
+
+
+<div class="modal fade" id="addCharge" tabindex="-1" aria-labelledby="addChargeName" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 90%">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light " id="addChargeName">Add Charge</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'add_charge' %}" id="AddChargeForm" class="row g-3 m-2">
+                {% csrf_token %}
+            
+                <div class="col-md-6">
+                    <label for="chargeType" class="form-label">Charge Type</label>
+                    {% if type %}
+                        <select id="chargeType" name="type" required class="form-select" style="padding: 8px;">
+                            {% for i in type %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        <input disabled value="No types available. Please add types." class="form-control " style="box-sizing: border-box;">
+                    {% endif %}
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="chargeCategory" class="form-label">Charge Category</label>
+                    {% if category %}
+                        <select id="chargeCategory" required name="category" class="form-select" style="padding: 8px;">
+                            {% for i in category %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        <input disabled value="No category available. Please add category." class="form-control " style="box-sizing: border-box;">
+                    {% endif %}
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="unitType" class="form-label">Unit Type</label>
+                    {% if unit %}
+                        <select id="unitType" required name="unit" class="form-select" style="padding: 8px;">
+                            {% for i in unit %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        <input disabled value="No unit available. Please add unit." class="form-control " style="box-sizing: border-box;">
+                    {% endif %}
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="chargeName" class="form-label">Charge Name</label>
+                    <input type="text" id="chargeName" name="name" class="form-control" required style="padding: 8px;">
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="taxCategory" class="form-label">Tax Category</label>
+                    {% if tax %}
+                        <select id="taxCategory" name="tax" required class="form-select tax" style="padding: 8px;">
+                            {% for i in tax %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        <input disabled value="No tax available. Please add tax." class="form-control " style="box-sizing: border-box;">
+                    {% endif %}
+                </div>
+            
+                <div class="col-md-6">
+                    <label for="tax" class="form-label">Tax</label>
+                    <input type="text" class="form-control percentage" readonly id="tax" name="tax_percentage" style="padding: 8px;">
+                 </div>
+           
+                <div class="col-md-6">
+                    <label for="standardCharge" class="form-label">Standard Charge (₹)</label>
+                    <input type="text" id="standardCharge" name="amount" class="form-control" required style="padding: 8px;">
+                </div>
+            
+                <div class="col-12">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="description" class="form-control" placeholder="....." style="padding: 8px;"></textarea>
+                </div>
+            
+                <div class="col-12">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 10px;">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+            
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Update Tax %
+    $(document).ready(function(){
+        update_tax();
+        $('.tax').change(function() {
+            update_tax();
+        });
+    });
+    
+    function update_tax()
+    {
+        $('#AddChargeForm ').each(function() {
+            var tax_id = $(this).find('.tax').val();
+            {% for i in tax %}
+                if (tax_id == "{{i.id}}") {
+                    $('.percentage').val("{{i.percentage}} %"); 
+                }
+            {% endfor %}
+        });
+        
+    }
+    
+</script>

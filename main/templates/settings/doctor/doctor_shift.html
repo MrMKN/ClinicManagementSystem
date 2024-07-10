@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} doctor|doctor shift {% endblock %}
+{% block content %}
+
+<div class="toast-container" aria-live="polite" aria-atomic="true" style="position: fixed; top: 0; right: 0; z-index: 1000; padding: 10px;"></div>
+
+<main class="d-flex"> 
+    <div class="list-group fs-10" style="width: 200px;font-size: 14px; margin:10px!important;">
+        <a href="{% url 'shift' %}" class="list-group-item list-group-item-action" aria-current="true">Shift</a>
+        <a href="{% url 'doctor_shift' %}" class="list-group-item list-group-item-action active" aria-current="true">Doctor Shift</a>
+    </div>
+
+    <div class="shadow-lg" style="margin:10px!important; padding:10px; width: 100%;">
+
+        <table id="myTable" class="table table-stripedy mt-4">
+            <thead>
+                <tr>
+                    <th style="text-align: left!important">No.</th>
+                    <th>Name</th>
+                    {% for i in shifts %}
+                        <th>{{i.name}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for a in doctors %}
+                <tr>
+                    <td style="text-align: left!important">{{forloop.counter}}</td>
+                    <td>{{a.name}} </td>
+                    {% for i in shifts %}
+                        <td> 
+                            <form class="shift-form" action="{% url 'change_shift_for_doctor' a.id i.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="checkbox" name="shift_id" {% if i in a.shift.all %} checked {% endif %}>
+                                <input type="hidden" name="add" value="{% if i in a.shift.all %}off{% else %}on{% endif %}">
+                            </form>
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+   
+
+<script>
+    $(document).ready(function() {
+        $('.shift-form input[type="checkbox"]').change(function() {
+            var form = $(this).closest('form');
+            
+            // Update hidden field based on checkbox state
+            if ($(this).is(':checked')) {
+                form.find('input[name="add"]').val('on');
+            } else {
+                form.find('input[name="add"]').val('off');
+            }
+
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize(),
+                headers: { 'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val() }, // Ensure CSRF token is included
+                success: function(response) {
+                    if (response.status === 'success') {
+                        showToast('success', `Shift ${response.action} successfully!`);
+                    } else {
+                        showToast('error', 'Failed to update shift.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    showToast('error', 'AJAX error: ' + status + ' - ' + error);
+                }
+            });
+        });
+
+        // Function to show Bootstrap toast
+        function showToast(type, message) {
+            var toast = $(
+                '<div class="toast my-1 opacity-75" role="alert" aria-live="assertive" aria-atomic="true" style=" color: black; font-weight: 700; border-radius: 6px;">' +
+                    '<div class="toast-body">' +
+                        message +
+                    '</div>' + 
+                '</div>'
+            );
+
+            if (type === 'success') {
+            
+                toast.css({ 'background-color': '#44d95c', 'color': 'white' });
+                console.log(toast);
+            } else if (type === 'error') {
+                toast.css({ 'background-color': 'red', 'color': 'white' });
+            }
+
+            $('.toast-container').append(toast);
+            // toast.toast({ autohide: true, delay: 5000 });
+            toast.toast('show');
+        }
+    });
+</script>
+    
+    
+
+
+
+{% endblock %}

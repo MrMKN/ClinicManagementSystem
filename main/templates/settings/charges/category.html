@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} charges|category {% endblock %}
+{% block content %}
+
+
+<main class="d-flex">
+    <div class="list-group fs-10" style="width: 200px;font-size: 14px; margin:10px!important;">
+        <a href="{% url 'charge' %}" class="list-group-item list-group-item-action">Charges</a>
+        <a href="{% url 'charge_category' %}" class="list-group-item list-group-item-action active">Charge category</a>
+        <a href="{% url 'charge_type' %}" class="list-group-item list-group-item-action">Charge Type</a>
+        <a href="{% url 'charge_tax' %}" class="list-group-item list-group-item-action">Tax Category</a>
+        <a href="{% url 'charge_unit' %}" class="list-group-item list-group-item-action">Unit Type</a>
+    </div>
+
+    <div class="shadow-lg" style="margin:10px!important; padding:10px; width: 100%;">
+
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn text-center mt-4 fs-14 btn-sm custoemBtn" data-bs-toggle="modal" data-bs-target="#addChargeCategory"><i class="bi bi-plus"></i> Add Category</button>
+        </div>
+
+        <table id="myTable" class="table table-stripedy mt-4">
+            <thead>
+            <tr>
+                <th style="text-align: left!important">No.</th>
+                <th>Name</th>
+                <th>Charge Type</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for a in charges %}
+                <tr>
+                    <td style="text-align: left!important">{{forloop.counter}}</td>
+                    <td>{{a.name}} </td>
+                    <td>{{a.ChargeType}}</td>
+                    <td class="d-flex ">
+                        {% comment %} edit {% endcomment %}
+                        <button type="button" class="btn btn-primary text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#editChargeCategory{{a.id}}" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                        {% comment %} delete {% endcomment %}
+                        <button type="button" class="btn btn-danger text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#deleteChargeCategory{{a.id}}" title="View & Edit"><i class="bi bi-file-earmark-fill"></i></button>
+                    </td>
+                    {% include 'modals/charges_modal/delete_modal/delete_category.html' %}
+                    {% include 'modals/charges_modal/edit_modal/edit_category.html' %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+{% include 'modals/charges_modal/add_category.html' %}
+
+
+
+
+{% endblock %}

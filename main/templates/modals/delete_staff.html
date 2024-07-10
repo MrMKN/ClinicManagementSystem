@@ -1,0 +1,56 @@
+
+
+
+<div class="modal fade" id="deleteStaff{{a.id}}" tabindex="-1" aria-labelledby="deleteStaffName" aria-hidden="true">
+    <div class="modal-dialog"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteStaffName">Delete Staff</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label>Name: {{a.name}}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label>Email: {{a.email}}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label>Role: {{a.role}}</label>
+                </div>
+
+
+                <div class="mb-3">
+                    <label>designation: {{a.designation}}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label>department: {{a.department}}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label>specialist: {{a.specialist}}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label>Gender: {{a.get_gender_display}}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label>Phone NO: {{a.phone}}</label>
+                </div>             
+            </div>   
+
+            <form method="post" action="{% url 'delete_staff' a.id %}">
+                {% csrf_token %}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" style='background-color: red'>Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

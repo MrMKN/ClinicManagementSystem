@@ -1,0 +1,50 @@
+
+
+
+<div class="modal fade" id="deleteAppoinment{{a.id}}" tabindex="-1" aria-labelledby="deleteAppoinmentName" aria-hidden="true">
+    <div class="modal-dialog"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteAppoinmentName">Delete Appoinment</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <div class="modal-body"> 
+                    
+                <div class="mb-3">
+                    <label><b>Patient:</b> {{a.patient}}</label>
+                </div>
+                <div class="mb-3 w-50">
+                    <label><b>Doctor:</b> {{a.doctor}}</label>              
+                </div>
+
+                <div class="mb-3 w-50">
+                    <label><b>Date & Time:</b> {{ a.appointed_date|date:'Y-m-d' }}T{{ a.appointed_time|date:'H:i' }}</label>
+                </div>
+                <div class="mb-3 w-50">
+                    <label><b>Priority:</b> {{a.get_priority_display}}</label>            
+                </div>
+
+                <div class="mb-3 w-50">
+                    <label><b>Payment:</b> {{a.get_payment_display}}</label>                
+                </div>
+
+                <div class="mb-3 w-50">
+                    <label><b>Status:</b> {{a.get_status_display}}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label><b>Message:</b> {{a.message}}</label>
+                </div>
+            </div>
+
+            <form method="post" action="{% url 'delete_appoinment' a.id %}">
+                {% csrf_token %}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" style='background-color: red'>Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

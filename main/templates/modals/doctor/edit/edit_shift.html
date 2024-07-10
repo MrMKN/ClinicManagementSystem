@@ -1,0 +1,42 @@
+
+
+<div class="modal fade" id="edit{{class_name}}{{a.id}}" tabindex="-1" aria-labelledby="edit{{class_name}}Name" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="edit{{class_name}}Name">Edit {{class_name}}</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'edit_shift' a.id %}">
+                {% csrf_token %}   
+                            
+                <div class="row mb-3 m-2">
+                    <label class="col-md-4 col-form-label">Name</label>
+                    <div class="col-md-8">
+                        <input type="text" name="name" class="form-control" required style="width: 50%;" value="{{a.name}}">
+                    </div>
+                </div>
+                
+                <div class="row mb-3 m-2">
+                    <label class="col-md-4 col-form-label">Time Start</label>
+                    <div class="col-md-8">
+                        <input type="time" name="start" required class="form-control " style="width: 50%;" value="{{a.time_start|time:'H:i'}}">
+                    </div>
+                </div>
+                
+                <div class="row mb-3 m-2">
+                    <label class="col-md-4 col-form-label">Time End</label>
+                    <div class="col-md-8">
+                        <input type="time" name="end" required class="form-control " style="width: 50%;" value="{{a.time_end|time:'H:i'}}">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

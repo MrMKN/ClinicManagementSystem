@@ -1,0 +1,56 @@
+
+
+
+
+<div class="modal fade" id="addVisitModal" tabindex="-1" aria-labelledby="addVisitModalName" aria-hidden="true">
+    <div class="modal-dialog"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="addVisitModalName">Add Visit</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'add_visit' %}" style="max-width: 400px; margin: 0 auto;">
+                {% csrf_token %}
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class=" col-md-6">
+                            <label class="form-label">Purpose:</label>
+                            <input type="text" name="purpose" required class="form-control  py-1">
+                        </div>
+                
+                        <div class=" col-md-6">
+                            <label class="form-label">Name:</label>
+                            <input type="text" name="name" required class="form-control  py-1">
+                        </div>
+                
+                        <div class=" col-md-6">
+                            <label class="form-label">Phone NO:</label>
+                            <input type="text" name="phone" required maxlength="10" class="form-control  py-1">
+                        </div>
+                
+                        <div class=" col-md-6">
+                            <label class="form-label">ID card:</label>
+                            <input type="text" name="id_card" class="form-control  py-1">
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <label class="form-label">Note:</label>
+                        <textarea name="note" placeholder="Reason" class="form-control"></textarea>
+                    </div>
+            
+                </div>
+            
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

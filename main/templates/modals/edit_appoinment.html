@@ -1,0 +1,86 @@
+
+
+
+<div class="modal fade" id="editAppoinment{{a.id}}" tabindex="-1" aria-labelledby="editAppoinmentName" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editAppoinmentName">Edit Appoinment</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'edit_appoinment' a.id %}">
+                {% csrf_token %}
+                <div class="modal-body "> 
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label>Patient: </label>
+                            <select id='selectPatient' name="patient" required class="form-select">
+                                {% for p in patients %}
+                                    <option name="patient" value="{{p.id}}" {% if p.id == a.patient.id %} selected {% endif %}>{{p.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <label>Doctor: </label>
+                            <select id='selectDoctor' name="doctor" required class="form-select">
+                                {% for d in doctors %}
+                                <option name="doctor" value="{{d.id}}" {% if d.id == a.doctor.id %} selected {% endif %}>{{d.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="datetime" class="form-label ">Date & Time:</label>
+                            <input type="datetime-local" id="datetime" name="datetime" class="form-control" value="{{ a.appointed_date|date:'Y-m-d' }}T{{ a.appointed_time|date:'H:i' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="priority" class="form-label">Priority:</label>
+                            <select id="priority" name="priority" class="form-select" required>
+                                <option value="N" {% if a.priority == 'N' %} selected {% endif %}>Normal</option>
+                                <option value="U" {% if a.priority == 'U' %} selected {% endif %}>Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="payment" class="form-label">Payment:</label>
+                            <select id="payment" name="payment" class="form-select" required>
+                                <option value="C" {% if a.payment == 'C' %} selected {% endif %}>Cash</option>
+                                <option value="U" {% if a.payment == 'U' %} selected {% endif %}>UPI</option>
+                                <option value="O" {% if a.payment == 'O' %} selected {% endif %}>Other</option>
+                                <option value="N" {% if a.payment == 'N' %} selected {% endif %}>Not Paid</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Status:</label>
+                            <select id="status" name="status" class="form-select" required>
+                                <option value="A" {% if a.status == 'A' %} selected {% endif %}>Approved</option>
+                                <option value="P" {% if a.status == 'P' %} selected {% endif %}>Pending</option>
+                                <option value="C" {% if a.status == 'C' %} selected {% endif %}>Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label for="message" class="form-label">Message:</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Reason">{{ a.message }}</textarea>
+                        </div>
+                    </div>
+                </div>    
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

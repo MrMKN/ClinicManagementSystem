@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} doctor wise view {% endblock %}
+{% block content %}
+
+
+
+<main>
+    <div class="r">
+        <div class="t">
+
+            <!-- [ Main Content ] start -->
+            <div class="row">
+                <!-- [ Row 1 ] start -->
+                <div class="col-md-12 col-xxl-4 w-100">
+                    <div class="card statistics-card-1">
+                        <div class="card-body">
+                            <img src="../static/assets/icons/img-status-2.svg" alt="img" class="img-fluid img-bg" />
+                            <form method="post" action="{% url 'doctor_wise' %}">
+                                {% csrf_token %}
+                                <div class="d-flex align-items-center">
+                                    <!-- <div class="avtar bg-brand-color-1 text-white me-3">
+                                      <i class="ph-duotone ph-currency-dollar f-26"></i>
+                                    </div> -->
+                                    <div>
+                                        <p class="text-muted mb-2">Doctor Wise Appoinment</p>
+                                        <div class="d-flex align-items-end">
+                                            <td>
+                                                <label class="d-block mb-1">Doctor <small class="req"> *</small></label>
+                                                <select id="selectDoctor" class="doctor" name="doctor" required style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;margin-left: 10px;">
+                                                    {% for d in doctors %}<option name="doctor" value="{{d.id}}">{{d.name}}</option>{% endfor %}
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <label class="d-block mb-1 ms-4">Date <small class="req"> *</small></label>
+                                                <input type="date" name="date" required style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;margin-left: 10px;">
+                                            </td>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-primary btn-sm">Search</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <table id="myTable" class="shadow-lg table table-stripedy mt-4">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>patient</th>
+            <th>doctor</th>
+            <th>appointed date</th>
+            <th>added date</th>
+            <th>doctor shift</th>
+            <th>priority</th>
+            <th>payment</th>
+            <th>amount</th>
+            <th>status</th>
+            <th>token</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for a in appoinments %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{a.patient}} </td>
+                <td>{{a.doctor}}</td>
+                <td>{{a.appointed_date}}</td>
+                <td>{{a.added_date}}</td>
+                <td>{{a.shift}}</td>
+                <td>{{a.get_priority_display}}</td>
+                <td>{{a.get_payment_display}}</td>
+                <td class="text-center">{{a.amount}}</td>
+                <td>{{a.get_status_display}}</td>
+                <td>{{a.token_number}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    </div>
+</main>
+
+
+
+
+{% endblock %}

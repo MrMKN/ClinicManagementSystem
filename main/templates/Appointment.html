@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} appointment {% endblock %}
+{% block content %}
+
+
+<main>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <h4>Appointment Details</h4>
+
+        <div>
+            <button type="button" class="btn text-center  btn-sm custoemBtn" data-bs-toggle="modal" data-bs-target="#addAppoinment"><i class="bi bi-plus"></i> Add Appoinment</button>
+            <a href="{% url 'doctor_wise' %}" class="btn text-center  btn-sm custoemBtn ms-2"><i class="bi bi-file-earmark"></i> Doctor Wise</a>
+            {% include 'modals/add_appoinment.html' %}
+            {% include 'modals/add_patient.html' %}
+        </div>
+    </div>
+    <hr>
+    <table id="myTable" class="shadow-lg table table-stripedy mt-2">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>patient</th>
+            <th>doctor</th>
+            <th>appointed date</th>
+            <th>added date</th>
+            <th>doctor shift</th>
+            <th>priority</th>
+            <th>payment</th>
+            <th>amount</th>
+            <th>status</th>
+            <th>token</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for a in appoinments %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{a.patient}} </td>
+                <td>{{a.doctor}}</td>
+                <td>{{a.appointed_date}}</td>
+                <td>{{a.added_date}}</td>
+                <td>{{a.shift}}</td>
+                <td>{{a.get_priority_display}}</td>
+                <td>{{a.get_payment_display}}</td>
+                <td class="text-center">{{a.amount}}</td>
+                <td>{{a.get_status_display}}</td>
+                <td>{{a.token_number}}</td>
+                <td class="d-flex ">
+
+                    <button type="button" class="btn btn-primary text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#editAppoinment{{a.id}}" title="Edit">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-danger text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAppoinment{{a.id}}" title="View & Edit">
+                        <i class="bi bi-file-earmark-fill"></i>
+                    </button>
+
+                    {% if a.status == "P" %}
+                        <form method="post" action="{% url 'approve_appoinment' a.id %}" class="m-1 fs-9">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-info text-center btn-sm" title="Approve">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                        </form>
+                    {% endif %}
+
+                    {% include 'print/appoinment.html' %}
+                    <button onclick="printAppoinment('printPage{{a.id}}')" type="button" class="btn btn-success m-1 fs-9 btn-sm" title="Print Appoinment">
+                        <i class="bi bi-printer-fill"></i>
+                    </button>
+
+                </td>
+                {% include 'modals/edit_appoinment.html' %}
+                {% include 'modals/delete_appoinment.html' %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+
+<script type="text/javascript">
+    function printAppoinment(page) {
+        let printContents = document.getElementById(page).innerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload();
+    }
+</script>
+
+{% endblock %}

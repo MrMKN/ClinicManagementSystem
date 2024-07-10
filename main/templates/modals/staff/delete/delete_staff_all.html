@@ -1,0 +1,27 @@
+
+
+<div class="modal fade" id="delete{{class_name}}{{a.id}}" tabindex="-1" aria-labelledby="delete{{class_name}}Name" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="delete{{class_name}}Name">Delete {{class_name}}</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label>Name: {{a.name}}</label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <form method="post" action="{% url 'delete_staff_all' a.id class_name %}">
+                    {% csrf_token %}                  
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" style='background-color: red'>Delete</button>       
+                </form>
+            </div> 
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+{% load static %}
+
+
+<div id="printPage{{a.id}}" style="display: none" class="d-print-none">
+    <div class="p-5 d-flex justify-content-between">
+        <div>
+            <img src="{% static 'favicon.svg' %}" alt="logo">
+            <h2>HOSPITAL</h2>
+        </div>
+
+        <div>
+            multi speciality hospital 
+        </div>
+    </div><hr>
+
+
+    <div class="p-5">
+        <div class="d-flex justify-content-between">
+            <div style="font-weight: bold !important;">
+                <p>Patient Name: {{a.patient.name}}</p>
+                <p>Gender: {{a.patient.get_gender_display}}</p>
+                <p>Age: {{a.patient.age}}</p>
+                <p>Phone: {{a.patient.phone}}</p>
+            </div>
+
+            <div style="font-weight: bold !important;">
+                <p>Appointment No: {{a.id}}</p>
+                <p>Appointment Date: {{a.appointed_date}}</p>
+                <p>Appointment Priority: {{a.get_priority_display}}</p>
+                <p>Shift Slot: {{a.shift}}</p>
+                <p>Status: {{a.get_status_display}}</p>
+            </div>
+
+            <div style="font-weight: bold !important;">
+                <p>Doctor: {{a.doctor.name}}</p>
+                <p>Department: {{a.doctor.department}}</p>
+                <p>Payment Mode: {{a.get_payment_display}}</p>
+                <p>Mobile Booking: NO</p>
+            </div>
+        </div>
+
+        <hr><h5>Payment Details</h5><hr>
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <p>Transaction ID</p>
+                <p>abcd</p>
+            </div>
+
+            <div>
+                <p>Source</p>
+                <p>{{a.get_payment_display}}</p>
+            </div>
+
+            <div>
+                <p>Paid Amount (₹)</p>
+                <p>{{a.amount}}</p>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,59 @@
+
+
+
+
+<div class="modal fade" id="addRole" tabindex="-1" aria-labelledby="addRoleName" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 90%">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="addRoleName">Add Role</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'add_role' %}">
+                {% csrf_token %}
+
+                <div class="row mb-3 m-2">
+                    <label class="col-md-4 col-form-label">Name</label>
+                    <div class="col-md-8">
+                        <input type="text" name="name" required class="form-control">
+                    </div>
+                </div>
+                
+                <div class="mb-3 m-2">
+                    <label>Dashboard </label>
+                    <input type="checkbox" name="dashboard" class="form-check-input ms-2">
+                </div>
+
+                <div class="mb-3 m-2">
+                    <label>Appointment </label>
+                    <input type="checkbox" name="appointment" class="form-check-input ms-2">
+                </div>
+
+                <div class="mb-3 m-2">
+                    <label>Front Office </label>
+                    <input type="checkbox" name="front_office" class="form-check-input ms-2">
+                </div>
+
+                <div class="mb-3 m-2">
+                    <label>Staffs </label>
+                    <input type="checkbox" name="staffs" class="form-check-input ms-2">
+                </div>
+
+                <div class="mb-3 m-2">
+                    <label>Settings </label>
+                    <input type="checkbox" name="settings" class="form-check-input ms-2">
+                </div>
+                
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

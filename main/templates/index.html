@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} index {% endblock %}
+{% block content %}
+
+
+<style>
+    .card {
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.01);
+        color: blue;
+    }
+</style>
+
+
+
+
+<main>   
+    <div class="row mt-4"> 
+        <!-- Appointments -->
+        <div class="col-md-12 col-xl-4">
+            <div class="card overflow-hidden">
+                <div class="card-body bg-light-primary">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <p class="text-muted mb-1">Total Appoinments</p>
+                            <div class="d-flex align-items-center mb-1">
+                                <h4 class="mb-0">{{ appoinments }}</h4>
+                            </div>
+                            <p class="text-primary text-sm mb-0">Monthly Increase</p>
+                        </div>
+                        <div class="col-6"> 
+                            <img src="../static/icons/medical-appointment.png" alt="img" class="img-fluid" style="height: 120px!important;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Income -->
+        <div class="col-md-12 col-xl-4">
+            <div class="card overflow-hidden">
+                <div class="card-body bg-light-primary">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <p class="text-muted mb-1">Total Income</p>
+                            <div class="d-flex align-items-center mb-1">
+                                <h4 class="mb-0">{{ income|intcomma }}₹</h4>
+                            </div>
+                            <p class="text-primary text-sm mb-0">Yearly Increase</p>
+                        </div>
+                        <div class="col-6">
+                            <img src="../static/icons/arrow-up.png" alt="img" class="img-fluid" style="height: 120px!important;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visitors -->
+        <div class="col-md-12 col-xl-4">
+            <div class="card overflow-hidden">
+                <div class="card-body bg-light-primary">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <p class="text-muted mb-1">Total Visitors</p>
+                            <div class="d-flex align-items-center mb-1">
+                                <h4 class="mb-0">{{ total_visitors }}</h4>
+                            </div>
+                            <p class="text-primary text-sm mb-0">More than last Month</p>
+                        </div>
+                        <div class="col-6">
+                            <img src="../static/icons/img-visitor.png" alt="img" class="img-fluid" style="height: 120px!important;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Doctor Live Table -->
+        <div class="col-md-6">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5>Doctors Live Report ({{date}})</h5>
+                </div>
+                <div class="card-body py-3 px-0">
+                    <div class="table-responsive affiliate-table">
+                        <table class="table table-borderless mb-0">
+                            <thead>
+                                <tr>
+                                    <td><h6 class="mb-0 ms-2">Name</h6></td>
+                                    <td><h6 class="mb-0 ms-2">Tokens</h6></td>
+                                    <td><i class="ti ti-arrow-down text-danger f-18 align-text-bottom"></i> 15.8%</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td colspan="5"><hr class="m-0 p-0"></td>
+                                </tr>
+                            {% for i in doctors %}
+                                <tr>
+                                    <td><h6 class="mb-0 ms-2">{{i.name}}</h6></td>
+                                    <td><h6 class="mb-0 ms-2">{{i.tokens}}</h6></td>
+                                    <td><i class="ti ti-arrow-up text-success f-18 align-text-bottom"></i> 5.8%</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Live Table -->
+        <div class="col-md-6">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5>Staff Live Report ({{date}})</h5>
+                </div>
+                <div class="card-body py-3 px-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-borderless mb-0">
+                            <tbody>
+                            {% for i in staffs %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="../static/assets/images/user/avatar-4.jpg" alt=""
+                                                class="img-fluid wid-30 rounded-1"/>
+                                            <h6 class="mb-0 ms-2">{{i.name}}</h6>
+                                        </div>
+                                    </td>
+                                    <td class="text-end f-w-600">$1,438</td>
+                                    <td><i class="ti ti-arrow-down text-danger f-18 align-text-bottom"></i> 15.8%</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

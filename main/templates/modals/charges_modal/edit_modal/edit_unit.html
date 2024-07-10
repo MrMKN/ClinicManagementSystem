@@ -1,0 +1,32 @@
+
+
+
+<div class="modal fade" id="editChargeUnit{{a.id}}" tabindex="-1" aria-labelledby="editChargeUnitName" aria-hidden="true">
+    <div class="modal-dialog modal-lg"  style="width: auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="editChargeUnitName">Edit Unit Type</h1>
+                <button type="button" class="closebtn" data-bs-dismiss="modal">×</button>
+            </div>
+
+            <form method="post" action="{% url 'edit_charge_unit' a.id %}">
+                {% csrf_token %}
+                <div class="modal-body">  
+
+                    <div class="row col-md-6">
+                        <label for="name" class="col-md-4 col-form-label">Name:</label>
+                        <div class="col-md-8">
+                            <input type="text" id="name" name="name" value="{{a.name}}" class="form-control py-1" required>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

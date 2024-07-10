@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} charges {% endblock %}
+{% block content %}
+
+
+
+<main class="d-flex">
+    <div class="list-group fs-10" style="width: 200px;font-size: 14px; margin:10px!important;">
+        <a href="{% url 'charge' %}" class="list-group-item list-group-item-action active" aria-current="true">Charges</a>
+        <a href="{% url 'charge_category' %}" class="list-group-item list-group-item-action">Charge category</a>
+        <a href="{% url 'charge_type' %}" class="list-group-item list-group-item-action">Charge Type</a>
+        <a href="{% url 'charge_tax' %}" class="list-group-item list-group-item-action">Tax Category</a>
+        <a href="{% url 'charge_unit' %}" class="list-group-item list-group-item-action">Unit Type</a>
+    </div>
+
+    <div class="shadow-lg" style="margin:10px!important; padding:10px; width: 100%;">
+
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn text-center mt-4 fs-14 btn-sm custoemBtn" data-bs-toggle="modal" data-bs-target="#addCharge"><i class="bi bi-plus"></i> Add Charge</button>
+        </div>
+
+        <table id="myTable" class="table table-stripedy mt-4">
+            <thead>
+            <tr>
+                <th style="text-align: left!important">No.</th>
+                <th>Name</th>
+                <th>Charge Category</th>
+                <th>Charge Type</th>
+                <th>Unit</th>
+                <th>Tax (%)</th>
+                <th>Standard Charge (₹)</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for a in charges %}
+                <tr>
+                    <td style="text-align: left!important">{{forloop.counter}}</td>
+                    <td>{{a.name}} </td>
+                    <td>{{a.ChargeCategory}}</td>
+                    <td>{{a.ChargeType}}</td>
+                    <td>{{a.UnitType}}</td>
+                    <td>{{a.TaxCategory.percentage}}</td>
+                    <td>{{a.charge}}</td>
+                    <td class="d-flex ">
+                        {% comment %} edit {% endcomment %}
+                        <button type="button" class="btn btn-primary text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#editCharge{{a.id}}" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                        {% comment %} delete {% endcomment %}
+                        <button type="button" class="btn btn-danger text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCharge{{a.id}}" title="View & Edit"><i class="bi bi-file-earmark-fill"></i></button>
+                    </td>
+                    {% include 'modals/charges_modal/delete_modal/delete_charge.html' %}
+                    {% include 'modals/charges_modal/edit_modal/edit_charge.html' %}
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+
+{% include 'modals/charges_modal/add_charge.html' %}
+  
+
+{% endblock %}

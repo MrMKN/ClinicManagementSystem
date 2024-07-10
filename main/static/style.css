@@ -1,0 +1,92 @@
+
+
+.modal-header {
+    background: linear-gradient(to right, #1e9ef2, #0094f5 100%);
+    color: #ffff;
+}
+.custoemBtn {
+    background: linear-gradient(to right, #1e9ef2, #0094f5 100%);
+    color: #ffff;
+    padding: 6px 10px;
+}
+
+.list-group-item:hover {
+    color: blue !important;
+  }
+
+
+th, td {
+        text-align: left!important
+    }
+
+.active::before {
+    background-color: transparent!important;
+}
+
+.modal-header {
+    background: linear-gradient(to right, #1e9ef2, #0094f5 100%);
+    color: #ffff;
+}
+.custoemBtn {
+    background: linear-gradient(to right, #1e9ef2, #0094f5 100%);
+    color: #ffff !important;
+    font-weight: bold !important;
+}
+
+.custoemBtn i {
+    font-size: 15px;
+    -webkit-text-stroke: 1px;
+}
+
+.closebtn { 
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+small {
+    color: red;
+}
+
+
+div.dt-buttons > .dt-button, div.dt-buttons > div.dt-button-split .dt-button {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 0.167em;
+    margin-right: 0.167em;
+    margin-bottom: 0.333em;
+    padding: 0.5em 1em;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 6px;
+    line-height: 1.6em;
+    color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr="rgba(230, 230, 230, 0.1)", EndColorStr="rgba(0, 0, 0, 0.1)");
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    outline: none;
+    text-overflow: ellipsis;
+}
+
+.dt-search > .dt-input {
+    border-radius: 6px!important;
+    margin: 10px!important;
+}
+
+.dt-paging > button {
+    border-radius: 3px!important;
+    margin: 5px!important;
+}
+
+main {padding: 2%!important;}

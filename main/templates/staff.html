@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} staff {% endblock %}
+{% block content %}
+
+
+
+{% for msg in messages %}
+    <div class="alert fade show rounded-0" role="alert" style="text-align: end; background-color: #ffcf4a; color: #000000;">
+        {{msg}}
+        <a style="color:#000000;" class="close"><i class="bi bi-x"></i></a>
+    </div>
+    <script>$(document).ready(function() {$(".alert .close").click(function() {$(".alert").slideUp(500)})});</script>
+{% endfor %}
+
+<main>
+
+    <hr>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>Staff Details</h4>
+        <button type="button" class="btn text-center fs-14 btn-sm custoemBtn" data-bs-toggle="modal" data-bs-target="#addStaffModal"><i class="bi bi-plus"></i> Add Staff</button>
+    </div>
+    <hr>
+    <form method="post" action="{% url 'staff' %}">
+        {% csrf_token %}
+            <label for="selectrole">FILTER ROLE</label>
+            <select id="selectrole" name="role" required style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;margin-left: 10px;">
+                <option hidden selected></option>
+                {% for i in role %}<option name="role" value="{{i.id}}">{{i.name}}</option>{% endfor %}
+            </select>
+            <button class="btn btn-primary btn-sm">Search</button>
+    </form>
+    <hr>
+
+    <table id="myTable" class="shadow-lg table table-stripedy mt-2">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>role</th>
+            <th>designation</th>
+            <th>department</th>
+            <th>specialist</th>
+            <th>gender</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for a in staffs %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{a.name}} </td>
+                <td>{{a.role}}</td>
+                <td>{{a.designation}}</td>
+                <td>{{a.department}}</td>
+                <td>{{a.specialist}}</td>
+                <td>{{a.get_gender_display}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#editStaff{{a.id}}" title="Edit">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-danger text-center m-1 fs-9 btn-sm" data-bs-toggle="modal" data-bs-target="#deleteStaff{{a.id}}" title="View & Delete">
+                        <i class="bi bi-view-list"></i>
+                    </button>
+                </td>
+                {% include 'modals/edit_staff.html' %}
+                {% include 'modals/delete_staff.html' %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+{% include 'modals/add_staff.html' %}
+
+
+
+{% endblock %}
